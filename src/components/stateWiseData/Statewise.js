@@ -1,10 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import '../stateWiseData/statewise.css'
-import { Line } from 'react-chartjs-2';
+// import { Line } from 'react-chartjs-2';
+import LineGraphState from './LineGraphState';
 
 function Statewise() {
 
   const [data, setData] = useState([])
+  const [state, setState] = useState('');
+
+  const stateHandler = (e) => {
+    setState(e.target.value);
+    console.log(state,"This is state value");
+  }
+
 
   const getcvdData = async () => {
     const url = 'https://data.covid19india.org/data.json';
@@ -19,30 +27,7 @@ function Statewise() {
     getcvdData();
   }, [])
   // const conNum = parsedData.statewise.map(d => d.confirmed)
-  const mapData = {
-    labels: ['CONFIRMED',	'RECOVERD',	'DEATHS',	'ACTIVE'],
-    datasets: [
-      {
-        label: '# of Votes',
-        // data: conNum,
-        fill: false,
-        backgroundColor: 'rgb(255, 99, 132)',
-        borderColor: 'rgba(255, 99, 132, 0.2)',
-      },
-    ],
-  };
 
-  const options = {
-    scales: {
-      yAxes: [
-        {
-          ticks: {
-            beginAtZero: true,
-          },
-        },
-      ],
-    },
-  };
 
   return (
     <>
@@ -67,7 +52,7 @@ function Statewise() {
                 data.map((curElen, ind) => {
                   return (
                     <tr key={ind}>
-                      <th> {curElen.state}</th>
+                      <th value={state} onChange={stateHandler}> {curElen.state}</th>
                       <td> {curElen.confirmed}</td>
                       <td> {curElen.recovered}</td>
                       <td> {curElen.deaths}</td>
@@ -81,18 +66,7 @@ function Statewise() {
             </tbody>
           </table>
         </div>
-        <div className='header'>
-          <h1 className='title'>Line Chart</h1>
-          <div className='links'>
-            <a
-              className='btn btn-gh'
-              href='https://github.com/reactchartjs/react-chartjs-2/blob/master/example/src/charts/Line.js'
-            >
-              Github Source
-            </a>
-          </div>
-        </div>
-        <Line data={mapData} options={options} />
+        <LineGraphState />
       </div>
     </>
   )
