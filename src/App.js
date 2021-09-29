@@ -1,4 +1,4 @@
-import './App.css';
+// import './App.css';
 import React, { useEffect, useState } from 'react'
 import CovidSummary from './components/CovidSummary';
 import LineGraph from './components/LineGraph';
@@ -6,6 +6,7 @@ import axios from './components/axios'
 import Statewise from './components/stateWiseData/Statewise';
 import Spinner from './components/Spinner';
 import LoadingBar from 'react-top-loading-bar'
+// import Delta from './components/stateWiseData/Delta';
 
 function App() {
 
@@ -99,18 +100,18 @@ function App() {
 
   return (
     <div className="App">
-      <LoadingBar
+      {/* <LoadingBar
         height={5}
         color='#f11946'
         progress={progress}
-      />
+      /> */}
       <CovidSummary
         totalConfirmed={totalConfirmed}
         totalRecovered={totalRecovered}
         totalDeaths={totalDeaths}
         country={country}
       />
-      <div>
+      {/* <div>
         <select value={country} onChange={countryHandler}>
           <option value="">Select Country</option>
           {
@@ -124,12 +125,13 @@ function App() {
           <option value="30">Last 30 days</option>
           <option value="90">Last 90 days</option>
         </select>
-      </div>
-      <LineGraph
+      </div> */}
+      {/* <LineGraph
         yAxis={coronaCountArr}
         lable={lable}
-      />
-      <Statewise />
+      /> */}
+      {/* <Statewise /> */}
+      {/* <Delta /> */}
     </div>
   );
 }
